@@ -1,13 +1,13 @@
-GPU=0
-CUDNN=0
-OPENCV=0
-OPENMP=0
-DEBUG=0
+GPU=1
+CUDNN=1
+OPENCV=1
+OPENMP=1
+DEBUG=1
 
-ARCH= -gencode arch=compute_30,code=sm_30 \
-      -gencode arch=compute_35,code=sm_35 \
-      -gencode arch=compute_50,code=[sm_50,compute_50] \
-      -gencode arch=compute_52,code=[sm_52,compute_52]
+ARCH= -gencode arch=compute_50,code=[sm_50,compute_50] \
+      -gencode arch=compute_52,code=[sm_52,compute_52] \
+	  -gencode arch=compute_61,code=[sm_61,compute_61] \
+	  -gencode arch=compute_75,code=[sm_75,compute_75]
 #      -gencode arch=compute_20,code=[sm_20,sm_21] \ This one is deprecated?
 
 # This is what I use, uncomment if you know your arch and want to specify
@@ -42,8 +42,8 @@ CFLAGS+=$(OPTS)
 ifeq ($(OPENCV), 1) 
 COMMON+= -DOPENCV
 CFLAGS+= -DOPENCV
-LDFLAGS+= `pkg-config --libs opencv` -lstdc++
-COMMON+= `pkg-config --cflags opencv` 
+LDFLAGS+= `pkg-config --libs opencv4` -lstdc++
+COMMON+= `pkg-config --cflags opencv4` 
 endif
 
 ifeq ($(GPU), 1) 
