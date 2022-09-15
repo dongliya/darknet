@@ -744,7 +744,9 @@ network *parse_network_cfg(char *filename)
     list *sections = read_cfg(filename);
     node *n = sections->front;
     if(!n) error("Config file has no sections");
+    //创建网络
     network *net = make_network(sections->size - 1);
+    //gpu id赋值
     net->gpu_index = gpu_index;
     size_params params;
 
@@ -900,6 +902,7 @@ list *read_cfg(char *filename)
         ++ nu;
         strip(line);
         switch(line[0]){
+			//读取块名
             case '[':
                 current = malloc(sizeof(section));
                 list_insert(options, current);
@@ -911,6 +914,7 @@ list *read_cfg(char *filename)
             case ';':
                 free(line);
                 break;
+            //读取块参数
             default:
                 if(!read_option(line, current->options)){
                     fprintf(stderr, "Config file error line %d, could parse: %s\n", nu, line);

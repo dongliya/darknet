@@ -7,6 +7,7 @@
 *.png
 *.jpg
 *.pyc
+backup/
 old/
 mnist/
 data/
@@ -20,6 +21,7 @@ submission/
 cfg/
 darknet
 .fuse*
+bad.list
 
 # OS Generated #
 .DS_Store*

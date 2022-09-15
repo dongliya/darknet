@@ -428,6 +428,7 @@ typedef enum {
 } learning_rate_policy;
 
 typedef struct network{
+	//网络层数
     int n;
     int batch;
     size_t *seen;

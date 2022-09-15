@@ -4,12 +4,14 @@ char *voc_names[] = {"aeroplane", "bicycle", "bird", "boat", "bottle", "bus", "c
 
 void train_yolo(char *cfgfile, char *weightfile)
 {
-    char *train_images = "/data/voc/train.txt";
-    char *backup_directory = "/home/pjreddie/backup/";
+    char *train_images = "/home/darknet/data/voc/train.txt";
+    char *backup_directory = "/home/darknet/backup/";
     srand(time(0));
+    //提取模型名字
     char *base = basecfg(cfgfile);
     printf("%s\n", base);
     float avg_loss = -1;
+    //加载网络
     network *net = load_network(cfgfile, weightfile, 0);
     printf("Learning Rate: %g, Momentum: %g, Decay: %g\n", net->learning_rate, net->momentum, net->decay);
     int imgs = net->batch*net->subdivisions;
@@ -104,7 +106,7 @@ void validate_yolo(char *cfg, char *weights)
 
     char *base = "results/comp4_det_test_";
     //list *plist = get_paths("data/voc.2007.test");
-    list *plist = get_paths("/home/pjreddie/data/voc/2007_test.txt");
+    list *plist = get_paths("/home/darknet/data/voc/2007_test.txt");
     //list *plist = get_paths("data/voc.2012.test");
     char **paths = (char **)list_to_array(plist);
 
@@ -316,7 +318,9 @@ void run_yolo(int argc, char **argv)
     }
 
     int avg = find_int_arg(argc, argv, "-avg", 1);
+    //模型
     char *cfg = argv[3];
+    //权重：可用于fineture
     char *weights = (argc > 4) ? argv[4] : 0;
     char *filename = (argc > 5) ? argv[5]: 0;
     if(0==strcmp(argv[2], "test")) test_yolo(cfg, weights, filename, thresh);

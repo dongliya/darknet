@@ -50,6 +50,13 @@ load_args get_base_args(network *net)
     return args;
 }
 
+/*
+ * @brief  加载网络
+ * @param  cfg     模型文件
+ *         weights 权重
+ *         clear   
+ * @return 
+ */ 
 network *load_network(char *cfg, char *weights, int clear)
 {
     network *net = parse_network_cfg(cfg);

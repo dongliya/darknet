@@ -49,6 +49,13 @@ metadata get_metadata(char *file)
     return m;
 }
 
+/*
+ * @brief           将"key_data=value_data"赋值给key和value
+ * @param  s        从cfg文件中读取的一行数据
+ *         options  key-value 链表 
+ * @return 0        读取成功
+ *         1        读取失败
+ */ 
 int read_option(char *s, list *options)
 {
     size_t i;

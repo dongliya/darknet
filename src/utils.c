@@ -175,6 +175,11 @@ char *find_char_arg(int argc, char **argv, char *arg, char *def)
     return def;
 }
 
+/*
+ * @brief  将路径名转换为文件名
+ * @param  cfgfile 模型文件
+ * @return 文件名不包含扩展名
+ */ 
 
 char *basecfg(char *cfgfile)
 {
