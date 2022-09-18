@@ -51,7 +51,7 @@ Mat image_to_mat(image im)
     constrain_image(copy);
     if(im.c == 3) rgbgr_image(copy);
 
-    
+
     Mat m(cv::Size(im.w,im.h), CV_8UC(im.c));
     int x,y,c;
  
@@ -59,7 +59,7 @@ Mat image_to_mat(image im)
     for(y = 0; y < im.h; ++y){
         for(x = 0; x < im.w; ++x){
             for(c= 0; c < im.c; ++c){
-                float val = im.data[c*im.h*im.w + y*im.w + x];
+                float val = copy.data[c*im.h*im.w + y*im.w + x];
                 m.data[y*step + x*im.c + c] = (unsigned char)(val*255);
             }
         }
@@ -87,7 +87,9 @@ image mat_to_image(Mat m)
             }
         }
     }
-    rgbgr_image(im);
+    if(im.c==3){
+        rgbgr_image(im);
+	}
     return im;
 }
 
